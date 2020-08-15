@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: nepalaudit
+
+  data:
+    mongodb:
+      database: nepalaudit
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.StringSerializer
+      bindings:
+        momentsUserChanged:
+          destination: moments.user.changed
+          contentType: application/json
+server:
+  port: 9090
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+hamroaudit.aws.access_key_id: AKIAWE4ZQ2N5G3COQ27C
+hamroaudit.aws.secret_access_key: ATDLyEDUenV0UZ22c7iDucdrD7N915yvVl3A0kz4
+hamroaudit.s3.bucket: sagarduwal-sample-bucket
+hamroaudit.s3.region: ap-southeast-1
+
+hamroaudit.s3.uploadfile: assets/
+
+
+security:
+  basic:
+    enable: false
+
+  jwt:
+    uri: /auth/**
+    header: Authorization
+    prefix: Bearer
+    expiration: 86400
+    secret: JwtSecretKey
+
+  service:
+    username: d245ef53-5ad5-4216-9c56-89fe0f8302a0
+    password: ef919ae4-b893-4969-b782-57978180ad33
