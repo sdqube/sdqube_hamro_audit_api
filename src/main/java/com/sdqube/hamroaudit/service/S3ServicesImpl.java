@@ -128,7 +128,7 @@ public class S3ServicesImpl implements S3Services {
                     new FileInputStream(file), objMetadata));
             logger.info("===================== Upload File - Done! =====================");
             fileResponse.setSuccess(true);
-            fileResponse.setFilename(fileUploadPath);
+            fileResponse.setFilename(fileRequest.getFilename());
             fileResponse.setPath(uploadFilePath);
             file.deleteOnExit();
         } catch (AmazonServiceException ase) {

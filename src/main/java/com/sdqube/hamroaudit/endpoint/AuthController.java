@@ -4,7 +4,7 @@ import com.sdqube.hamroaudit.exception.BadRequestException;
 import com.sdqube.hamroaudit.exception.ResourceNotFoundException;
 import com.sdqube.hamroaudit.exception.UserAlreadyExistsException;
 import com.sdqube.hamroaudit.model.Profile;
-import com.sdqube.hamroaudit.model.ProximityUserDetails;
+import com.sdqube.hamroaudit.model.AuditUserDetails;
 import com.sdqube.hamroaudit.model.User;
 import com.sdqube.hamroaudit.payload.ApiResponse;
 import com.sdqube.hamroaudit.payload.JwtAuthenticationResponse;
@@ -36,12 +36,13 @@ import java.net.URI;
  * Date: 7/4/20 7:31 PM
  */
 @RestController
+@RequestMapping("/api/auth")
 public class AuthController {
     private final Logger log = LoggerFactory.getLogger(AuthController.class);
 
-
     @Autowired
     private UserService userService;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -103,7 +104,7 @@ public class AuthController {
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> updateProfilePicture(
             @RequestBody String profilePicture,
-            @AuthenticationPrincipal ProximityUserDetails userDetails) {
+            @AuthenticationPrincipal AuditUserDetails userDetails) {
 
         userService.updateProfilePicture(profilePicture, userDetails.getId());
 
@@ -129,5 +130,6 @@ public class AuthController {
         return ResponseEntity
                 .ok(userService.findAll());
     }
+
 
 }

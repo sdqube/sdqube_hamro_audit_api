@@ -6,13 +6,13 @@ package com.sdqube.hamroaudit.payload;
  * Date: 8/16/20 1:39 AM
  */
 public class FileResponse {
-    String filename;
-    String url;
-    String path;
+    String filename = "";
+    String url = "";
+    String path = "";
 
     boolean isSuccess = false;
-    ErrorCode errorCode;
-    String errorMsg;
+    ErrorCode errorCode = ErrorCode.UNKNOWN_ERROR;
+    String errorMsg = "";
 
     public FileResponse() {
     }
@@ -69,5 +69,17 @@ public class FileResponse {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    @Override
+    public String toString() {
+        return "FileResponse{" +
+                "filename='" + filename + '\'' +
+                ", url='" + url + '\'' +
+                ", path='" + path + '\'' +
+                ", isSuccess=" + isSuccess +
+                ", errorCode=" + errorCode +
+                ", errorMsg='" + errorMsg + '\'' +
+                '}';
     }
 }

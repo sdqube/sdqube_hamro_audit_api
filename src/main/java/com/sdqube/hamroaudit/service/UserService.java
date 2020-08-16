@@ -24,7 +24,7 @@ import java.util.Optional;
  */
 @Service
 public class UserService {
-    private final Logger log = LoggerFactory.getLogger(AuthController.class);
+    private final Logger log = LoggerFactory.getLogger(UserService.class);
     private PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
     @Autowired

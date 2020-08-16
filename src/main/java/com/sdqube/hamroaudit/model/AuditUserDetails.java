@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
  * Github: @sagarduwal
  * Date: 7/3/20 1:32 AM
  */
-public class ProximityUserDetails extends User implements UserDetails {
+public class AuditUserDetails extends User implements UserDetails {
 
-    public ProximityUserDetails(final User user) {
+    public AuditUserDetails(final User user) {
         super(user);
     }
 

@@ -41,7 +41,6 @@ public class S3Utils {
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             System.out.println("targetLocation = " + targetLocation);
             System.out.println("fileName = " + fileName);
-            Files.createFile(targetLocation);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
             return fileName;

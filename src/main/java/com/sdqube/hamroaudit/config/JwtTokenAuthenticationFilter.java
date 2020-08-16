@@ -1,6 +1,6 @@
 package com.sdqube.hamroaudit.config;
 
-import com.sdqube.hamroaudit.model.ProximityUserDetails;
+import com.sdqube.hamroaudit.model.AuditUserDetails;
 import com.sdqube.hamroaudit.service.JwtTokenProvider;
 import com.sdqube.hamroaudit.service.UserService;
 import io.jsonwebtoken.Claims;
@@ -36,6 +36,17 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         this.serviceUsername = serviceUsername;
     }
 
+    private static String getClientIp(HttpServletRequest request) {
+        String remoteAddr = "";
+        if (request != null) {
+            remoteAddr = request.getHeader("X-FORWARDED-FOR");
+            if (remoteAddr == null || "".equals(remoteAddr)) {
+                remoteAddr = request.getRemoteAddr();
+            }
+        }
+        return remoteAddr;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String header = httpServletRequest.getHeader(jwtConfig.getHeader());
@@ -48,6 +59,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         String token = header.replace(jwtConfig.getPrefix(), "");
         if (tokenProvider.validateToken(token)) {
             Claims claims = tokenProvider.getClaimsFromJwt(token);
+//            claims.put("ip", getClientIp(httpServletRequest));
             String username = claims.getSubject();
 
             UsernamePasswordAuthenticationToken auth = null;
@@ -60,7 +72,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                                 .collect(Collectors.toList()));
             } else {
                 auth = userService.findByUsername(username)
-                        .map(ProximityUserDetails::new)
+                        .map(AuditUserDetails::new)
                         .map(proximityUserDetails -> {
                             UsernamePasswordAuthenticationToken authenticationToken =
                                     new UsernamePasswordAuthenticationToken(proximityUserDetails, null,

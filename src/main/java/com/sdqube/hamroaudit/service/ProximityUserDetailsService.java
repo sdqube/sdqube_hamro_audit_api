@@ -1,7 +1,6 @@
 package com.sdqube.hamroaudit.service;
 
-import com.sdqube.hamroaudit.endpoint.AuthController;
-import com.sdqube.hamroaudit.model.ProximityUserDetails;
+import com.sdqube.hamroaudit.model.AuditUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +26,7 @@ public class ProximityUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userService.findByUsername(username)
-                .map(ProximityUserDetails::new)
+                .map(AuditUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
     }
 }

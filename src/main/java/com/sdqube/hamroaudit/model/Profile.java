@@ -56,4 +56,14 @@ public class Profile {
     public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "displayName='" + displayName + '\'' +
+                ", profilePictureUrl='" + profilePictureUrl + '\'' +
+                ", birthday=" + birthday +
+                ", addresses=" + addresses +
+                '}';
+    }
 }
