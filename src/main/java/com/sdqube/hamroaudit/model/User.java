@@ -41,7 +41,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.active = true;
-        this.roles = new HashSet<>() {{
+        this.roles = new HashSet<Role>() {{
             new Role("USER");
         }};
     }
