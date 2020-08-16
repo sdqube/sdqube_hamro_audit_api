@@ -15,5 +15,4 @@ public interface S3Services {
     public void downloadFile(String keyName);
 
     public FileResponse uploadFile(FileRequest fileRequest);
-    public void uploadFile(String keyName, String uploadFilePath);
 }

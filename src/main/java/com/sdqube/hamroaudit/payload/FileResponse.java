@@ -11,6 +11,8 @@ public class FileResponse {
     String path;
 
     boolean isSuccess = false;
+    ErrorCode errorCode;
+    String errorMsg;
 
     public FileResponse() {
     }
@@ -51,5 +53,21 @@ public class FileResponse {
 
     public void setSuccess(boolean success) {
         isSuccess = success;
+    }
+
+    public ErrorCode getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(ErrorCode errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }

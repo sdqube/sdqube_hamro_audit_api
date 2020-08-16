@@ -64,13 +64,5 @@ public class UploadController {
             return ResponseEntity.ok(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//
-//    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> findAll() {
-//        log.info("retrieving all users");
-//
-//        return ResponseEntity
-//                .ok(userService.findAll());
-//    }
 
 }

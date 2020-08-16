@@ -27,12 +27,12 @@ eureka:
       default-zone: http://localhost:8761/eureka
 spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
-hamroaudit.aws.access_key_id: AKIAWE4ZQ2N5G3COQ27C
-hamroaudit.aws.secret_access_key: ATDLyEDUenV0UZ22c7iDucdrD7N915yvVl3A0kz4
-hamroaudit.s3.bucket: sagarduwal-sample-bucket
-hamroaudit.s3.region: ap-southeast-1
+hamroaudit.aws.access_key_id: AKIA2P2YZ57L6XF7JRPE
+hamroaudit.aws.secret_access_key: YAQPbPeyqIrleMFAmcrHX2THUAWTQWX6/Z3DcESc
+hamroaudit.s3.bucket: hamro-audit-file
+hamroaudit.s3.region: us-east-1
 
-hamroaudit.s3.uploadfile: assets/
+hamroaudit.s3.uploadfile: ./assets
 
 
 security:
