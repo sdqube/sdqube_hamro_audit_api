@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
  * Date: 7/4/20 4:13 PM
  */
 @Service
-public class ProximityUserDetailsService implements UserDetailsService {
-    private final Logger log = LoggerFactory.getLogger(ProximityUserDetailsService.class);
+public class AuditUserDetailsService implements UserDetailsService {
+    private final Logger log = LoggerFactory.getLogger(AuditUserDetailsService.class);
 
     private UserService userService;
 
-    public ProximityUserDetailsService(UserService userService) {
+    public AuditUserDetailsService(UserService userService) {
         this.userService = userService;
     }
 
