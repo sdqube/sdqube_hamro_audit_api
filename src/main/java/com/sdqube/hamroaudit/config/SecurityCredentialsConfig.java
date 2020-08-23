@@ -1,12 +1,13 @@
 package com.sdqube.hamroaudit.config;
 
 import com.sdqube.hamroaudit.model.Role;
-import com.sdqube.hamroaudit.service.JwtTokenProvider;
 import com.sdqube.hamroaudit.service.AuditUserDetailsService;
+import com.sdqube.hamroaudit.service.JwtTokenProvider;
 import com.sdqube.hamroaudit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
@@ -31,6 +32,9 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private AuditUserDetailsService userDetailsService;
 
     @Autowired
@@ -38,9 +42,6 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtTokenProvider tokenProvider;
-
-    @Autowired
-    private UserService userService;
 
     @Value("${security.service.username}")
     private String serviceUsername;

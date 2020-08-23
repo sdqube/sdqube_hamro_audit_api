@@ -5,7 +5,7 @@ package com.sdqube.hamroaudit.payload;
  * Github: @sagarduwal
  * Date: 8/16/20 1:17 PM
  */
-public enum  ErrorCode {
+public enum ErrorCode {
     UNKNOWN_ERROR,
     NULLPOINT_EXCEPTION,
     ILLEGAL,

@@ -1,7 +1,6 @@
 package com.sdqube.hamroaudit.service;
 
 import com.sdqube.hamroaudit.config.JwtConfig;
-import com.sdqube.hamroaudit.endpoint.AuthController;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class JwtTokenProvider {
 
-    private final Logger log = LoggerFactory.getLogger(AuthController.class);
+    private final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
 
     private final JwtConfig jwtConfig;
 

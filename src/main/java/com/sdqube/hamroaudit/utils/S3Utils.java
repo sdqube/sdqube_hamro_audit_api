@@ -22,7 +22,7 @@ public class S3Utils {
 
     public S3Utils(String fileStorageLocation) {
         System.out.println("fileStorageLocation = " + fileStorageLocation);
-        if(StringUtils.isEmpty(fileStorageLocation)) fileStorageLocation  = "/hamro-audit";
+        if (StringUtils.isEmpty(fileStorageLocation)) fileStorageLocation = "/hamro-audit";
         this.fileStorageLocation = Paths.get(fileStorageLocation)
                 .toAbsolutePath().normalize();
     }

@@ -2,7 +2,8 @@ package com.sdqube.hamroaudit.endpoint;
 
 import com.sdqube.hamroaudit.model.AuditUserDetails;
 import com.sdqube.hamroaudit.model.UserBill;
-import com.sdqube.hamroaudit.payload.*;
+import com.sdqube.hamroaudit.payload.FileRequest;
+import com.sdqube.hamroaudit.payload.FileResponse;
 import com.sdqube.hamroaudit.service.S3Services;
 import com.sdqube.hamroaudit.service.UserBillService;
 import org.slf4j.Logger;
@@ -79,7 +80,7 @@ public class MediaController {
         }
     }
 
-        @GetMapping(value = "/file/{type}/{filename}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/file/{type}/{filename}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> getFiles(@PathVariable("filename") String filename, @PathVariable("type") String fileType) {
         try {

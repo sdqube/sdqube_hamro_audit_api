@@ -8,7 +8,7 @@ import java.util.UUID;
  * Date: 8/16/20 2:25 PM
  */
 public class HamroAuditUtils {
-    public static String uuid(){
+    public static String uuid() {
         return UUID.randomUUID().toString();
     }
 }

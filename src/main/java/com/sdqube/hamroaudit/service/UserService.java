@@ -1,15 +1,20 @@
 package com.sdqube.hamroaudit.service;
 
-import com.sdqube.hamroaudit.endpoint.AuthController;
 import com.sdqube.hamroaudit.exception.ResourceNotFoundException;
 import com.sdqube.hamroaudit.exception.UserAlreadyExistsException;
 import com.sdqube.hamroaudit.messaging.UserActivityEventHandler;
 import com.sdqube.hamroaudit.model.Role;
 import com.sdqube.hamroaudit.model.User;
+import com.sdqube.hamroaudit.payload.JwtAuthenticationResponse;
+import com.sdqube.hamroaudit.payload.LoginRequest;
 import com.sdqube.hamroaudit.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +31,18 @@ import java.util.Optional;
 public class UserService {
     private final Logger log = LoggerFactory.getLogger(UserService.class);
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private UserActivityEventHandler userActivityEventHandler;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtTokenProvider tokenProvider;
 
     public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserActivityEventHandler userActivityEventHandler) {
         this.passwordEncoder = passwordEncoder;
@@ -46,6 +60,22 @@ public class UserService {
 
     public List<User> findByUsernameIn(List<String> usernames) {
         return userRepository.findByUsernameIn(usernames);
+    }
+
+    public JwtAuthenticationResponse authenticateUser(LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = tokenProvider.generateToken(authentication);
+        User userInfo = (User) authentication.getPrincipal();
+
+        return new JwtAuthenticationResponse(token, userInfo);
     }
 
     public User registerUser(User user) {

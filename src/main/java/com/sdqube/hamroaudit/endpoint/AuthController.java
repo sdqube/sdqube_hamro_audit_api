@@ -3,8 +3,8 @@ package com.sdqube.hamroaudit.endpoint;
 import com.sdqube.hamroaudit.exception.BadRequestException;
 import com.sdqube.hamroaudit.exception.ResourceNotFoundException;
 import com.sdqube.hamroaudit.exception.UserAlreadyExistsException;
-import com.sdqube.hamroaudit.model.Profile;
 import com.sdqube.hamroaudit.model.AuditUserDetails;
+import com.sdqube.hamroaudit.model.Profile;
 import com.sdqube.hamroaudit.model.User;
 import com.sdqube.hamroaudit.payload.ApiResponse;
 import com.sdqube.hamroaudit.payload.JwtAuthenticationResponse;
@@ -15,6 +15,7 @@ import com.sdqube.hamroaudit.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,33 +41,16 @@ import java.net.URI;
 public class AuthController {
     private final Logger log = LoggerFactory.getLogger(AuthController.class);
 
+    @Lazy
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenProvider tokenProvider;
+    UserService userService;
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         try {
             log.info("Login User: {}", loginRequest.getUsername());
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequest.getUsername(),
-                            loginRequest.getPassword()
-                    )
-            );
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            String jwt = tokenProvider.generateToken(authentication);
-
-            User userInfo = (User) authentication.getPrincipal();
-
-            return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, userInfo));
+            JwtAuthenticationResponse jwtAuthenticationResponse = userService.authenticateUser(loginRequest);
+            return ResponseEntity.ok(jwtAuthenticationResponse);
         } catch (Exception ex) {
             log.error("Error: {}", ex.toString());
             return ResponseEntity.ok(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -77,7 +61,7 @@ public class AuthController {
     public ResponseEntity<?> createUser(@Valid @RequestBody SignupRequest payload) {
         log.info("creating user {}", payload.getUsername());
 
-        User user=  new User();
+        User user = new User();
         user.setUsername(payload.getUsername());
         user.setEmail(payload.getEmail());
         user.setPassword(payload.getPassword());
