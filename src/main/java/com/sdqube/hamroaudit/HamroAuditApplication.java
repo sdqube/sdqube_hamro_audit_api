@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
+import org.springframework.kafka.annotation.KafkaListener;
 
 @SpringBootApplication
 @EnableMongoAuditing
@@ -16,5 +17,4 @@ public class HamroAuditApplication {
     public static void main(String[] args) {
         SpringApplication.run(HamroAuditApplication.class, args);
     }
-
 }

@@ -44,11 +44,9 @@ services:
       - ../nepalaudit-mongo:/data/db
 
   hamro-audit:
-    image: hamro-audit
+    image: sagarduwal/hamro-audit
     container_name: "hamro-audit"
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+
     expose:
       - "8080"
     ports:
