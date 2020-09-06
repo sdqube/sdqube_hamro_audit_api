@@ -1,7 +1,7 @@
 # sdqube_hamro_audit
 ```shell script
-docker-compose -f docker-compose.yml up -d
-docker-compose run mongodb kafka kafdrop sdqube/hamro-audit
+ $ docker-compose -f docker-compose.yml up -d
+ $ docker-compose run mongodb kafka kafdrop sdqube/hamro-audit
 ```
 
 ### Building docker image to docker-hub
@@ -30,17 +30,22 @@ $ docker logs hamro-audit -f
 
 ### Stop docker compose
 ```shell script
-docker-compose -f docker-compose.yml up -d
-docker-compose down
+ $ docker-compose -f docker-compose.yml up -d
+ $ docker-compose down
 ```
 
 
 ### Command line to remove docker containers 
 ```shell script
-docker stop hamro-audit
-docker container rm mongodb kafka kafdrop
-docker rmi sdqube/hamro-audit
+ $ docker stop hamro-audit
+ $ docker container rm mongodb kafka kafdrop
+ $ docker rmi sdqube/hamro-audit
 ```  
+
+## TODO
+- referral API for hamro audit
+- migrate mongo to mysql db
+- optimize java code for dependency and minimal fingerprinting
 
 
 
