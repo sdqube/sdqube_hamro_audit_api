@@ -1,6 +1,8 @@
 # sdqube_hamro_audit
-> docker-compose -f docker-compose.yml up -d
-> docker-compose run mongodb kafka kafdrop sdqube/hamro-audit
+```shell script
+docker-compose -f docker-compose.yml up -d
+docker-compose run mongodb kafka kafdrop sdqube/hamro-audit
+```
 
 ### Building docker image to docker-hub
 
